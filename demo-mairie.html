@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mairie de Saint-Aurel — Site Officiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1b4f8a;
+    --blue-dark: #0d2d52;
+    --blue-mid: #2563ab;
+    --red: #c0392b;
+    --white: #ffffff;
+    --off: #f4f6f9;
+    --border: #dde3ec;
+    --text: #1a1a2e;
+    --muted: #5a6480;
+    --accent: #e8a020;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--blue-dark);
+    padding: 8px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topbar-left { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; gap: 24px; }
+  .topbar-left a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; }
+  .topbar-left a:hover { color: white; }
+  .topbar-right { display: flex; gap: 16px; }
+  .topbar-right a { font-size: 11px; color: rgba(255,255,255,0.5); text-decoration: none; letter-spacing: 1px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 3px solid var(--blue);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 48px; height: 72px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+  .nav-logo-seal {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--blue); display: flex; align-items: center; justify-content: center;
+    font-size: 22px; border: 3px solid var(--accent);
+  }
+  .nav-logo-text strong { display: block; font-size: 1rem; font-weight: 600; color: var(--blue-dark); }
+  .nav-logo-text span { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .nav-links { display: flex; list-style: none; height: 72px; }
+  .nav-links a { display: flex; align-items: center; padding: 0 18px; font-size: 13px; font-weight: 400; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: color .2s, border-color .2s; }
+  .nav-links a:hover { color: var(--blue); border-color: var(--blue); }
+  .nav-links a.active { color: var(--blue); border-color: var(--blue); font-weight: 500; }
+  .nav-search { background: var(--off); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; font-size: 13px; outline: none; color: var(--text); width: 200px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(rgba(13,45,82,0.72), rgba(13,45,82,0.72)),
+                url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80') center/cover no-repeat;
+    min-height: 480px;
+    display: flex; align-items: flex-end;
+    padding: 0 0 60px;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .hero-title { font-family: 'Source Serif 4', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--white); font-weight: 300; line-height: 1.15; max-width: 700px; margin-bottom: 24px; }
+  .hero-title em { font-style: italic; color: #93c5fd; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-blue { background: var(--blue); color: var(--white); padding: 12px 28px; border: none; border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .2s; }
+  .btn-blue:hover { background: var(--blue-mid); }
+  .btn-outline { background: none; color: var(--white); padding: 12px 28px; border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; font-size: 13px; cursor: pointer; transition: background .2s; }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* ALERTES */
+  .alertes { background: var(--accent); padding: 14px 48px; display: flex; gap: 16px; align-items: center; }
+  .alerte-tag { background: var(--red); color: white; font-size: 10px; font-weight: 600; letter-spacing: 1px; padding: 3px 10px; border-radius: 2px; text-transform: uppercase; flex-shrink: 0; }
+  .alerte-text { font-size: 13px; color: var(--blue-dark); font-weight: 500; }
+  .alerte-link { font-size: 12px; color: var(--blue-dark); text-decoration: underline; margin-left: auto; white-space: nowrap; }
+
+  /* SERVICES RAPIDES */
+  .services-rapides { background: var(--blue-dark); padding: 40px 48px; }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+  .services-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .service-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px 12px; text-align: center; cursor: pointer; text-decoration: none; transition: background .2s; display: block; }
+  .service-btn:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.25); }
+  .service-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .service-label { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.3; }
+
+  /* CONTENU PRINCIPAL */
+  .main-content { max-width: 1200px; margin: 0 auto; padding: 60px 48px; display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+
+  /* ACTUALITÉS */
+  .section-title-small { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--blue); display: flex; justify-content: space-between; align-items: center; }
+  .section-title-small a { font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0; text-transform: none; }
+  .actu-list { display: flex; flex-direction: column; gap: 0; }
+  .actu-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); align-items: start; }
+  .actu-img { width: 120px; height: 80px; background-size: cover; background-position: center; border-radius: 4px; flex-shrink: 0; }
+  .actu-date { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .actu-title { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
+  .actu-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .actu-cat { display: inline-block; background: var(--off); color: var(--blue); font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 2px; margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 28px; }
+  .sidebar-card { background: var(--off); border-radius: 8px; padding: 24px; }
+  .sidebar-card.blue { background: var(--blue); }
+  .sidebar-card-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-weight: 500; }
+  .sidebar-card.blue .sidebar-card-title { color: rgba(255,255,255,0.6); }
+  .agenda-item { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .agenda-item:last-child { border-bottom: none; }
+  .agenda-date-box { background: var(--blue); color: white; width: 44px; text-align: center; padding: 6px 4px; border-radius: 4px; flex-shrink: 0; }
+  .agenda-day { font-size: 18px; font-weight: 700; line-height: 1; }
+  .agenda-month { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+  .agenda-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .agenda-lieu { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .contact-line { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.85); font-size: 13px; margin-bottom: 12px; }
+  .contact-line:last-child { margin-bottom: 0; }
+  .contact-icon-s { font-size: 16px; width: 20px; text-align: center; }
+  .mairie-hrs { display: flex; flex-direction: column; gap: 8px; }
+  .hr-line { display: flex; justify-content: space-between; font-size: 13px; }
+  .hr-day { color: var(--muted); }
+  .hr-time { font-weight: 500; color: var(--text); }
+
+  /* FOOTER */
+  footer { background: var(--blue-dark); margin-top: 40px; }
+  .footer-top { max-width: 1200px; margin: 0 auto; padding: 48px 48px 32px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+  .footer-brand { font-family: 'Source Serif 4', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 8px; }
+  .footer-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .footer-col h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 48px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .myrkr-badge { font-size: 11px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color .2s; }
+  .myrkr-badge:hover { color: rgba(255,255,255,0.75); }
+  .myrkr-badge span { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .topbar { display: none; }
+    .nav-inner { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 0 40px; }
+    .hero-inner { padding: 0 24px; }
+    .alertes { padding: 12px 24px; }
+    .services-rapides { padding: 28px 24px; }
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .main-content { grid-template-columns: 1fr; padding: 32px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; padding: 32px 24px 20px; }
+    .footer-bottom { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Place de la République, 12400 Saint-Aurel</span>
+    <a href="#">📞 05 65 12 34 56</a>
+    <a href="#">✉ mairie@saint-aurel.fr</a>
+  </div>
+  <div class="topbar-right">
+    <a href="#">Accessibilité</a>
+    <a href="#">Plan du site</a>
+    <a href="#">Espace pro</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-seal">🏛️</div>
+      <div class="nav-logo-text">
+        <strong>Mairie de Saint-Aurel</strong>
+        <span>Commune du Aveyron · 4 200 habitants</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Accueil</a></li>
+      <li><a href="#">Ma Commune</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Démarches</a></li>
+      <li><a href="#">Élus</a></li>
+      <li><a href="#">Agenda</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <input class="nav-search" type="text" placeholder="🔍 Rechercher...">
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Bienvenue sur le site officiel</p>
+    <h1 class="hero-title">Saint-Aurel,<br>une commune à vivre<br><em>ensemble</em></h1>
+    <div class="hero-btns">
+      <button class="btn-blue">Mes démarches en ligne</button>
+      <button class="btn-outline">Découvrir la commune</button>
+    </div>
+  </div>
+</section>
+
+<div class="alertes">
+  <span class="alerte-tag">Info</span>
+  <span class="alerte-text">Travaux Avenue de la Gare — Circulation alternée du 24 mars au 12 avril 2025.</span>
+  <a href="#" class="alerte-link">En savoir plus →</a>
+</div>
+
+<div class="services-rapides">
+  <div class="services-inner">
+    <div class="services-title">Accès rapides</div>
+    <div class="services-grid">
+      <a href="#" class="service-btn">
+        <div class="service-icon">📋</div>
+        <div class="service-label">État civil</div>
+      </a>
+      <a href="#" class="service-btn">
+        <div class="service-icon">🗳️</div>
+        <div class="service-label">Élections</div>
+      </a>
+      <a href="#" class="service-btn">
+        <div class="service-icon">🏗️</div>
+        <div class="service-label">Urbanisme</div>
+      </a>
+      <a href="#" class="service-btn">
+        <div class="service-icon">♻️</div>
+        <div class="service-label">Collecte déchets</div>
+      </a>
+      <a href="#" class="service-btn">
+        <div class="service-icon">🏫</div>
+        <div class="service-label">Écoles</div>
+      </a>
+      <a href="#" class="service-btn">
+        <div class="service-icon">📞</div>
+        <div class="service-label">Urgences</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div>
+    <div class="section-title-small">
+      Actualités <a href="#">Toutes les actualités →</a>
+    </div>
+    <div class="actu-list">
+      <div class="actu-item">
+        <div class="actu-img" style="background-image:url('https://images.unsplash.com/photo-1577495508048-b635879837f1?w=300&q=80')"></div>
+        <div>
+          <div class="actu-date">18 mars 2025</div>
+          <div class="actu-title">Budget primitif 2025 adopté en conseil municipal</div>
+          <div class="actu-excerpt">Le conseil municipal a voté le budget primitif de la commune lors de sa séance du 17 mars. Les grandes orientations prévoient un investissement record pour la rénovation des équipements sportifs.</div>
+          <span class="actu-cat">Vie municipale</span>
+        </div>
+      </div>
+      <div class="actu-item">
+        <div class="actu-img" style="background-image:url('https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=300&q=80')"></div>
+        <div>
+          <div class="actu-date">10 mars 2025</div>
+          <div class="actu-title">Ouverture de la maison France Services</div>
+          <div class="actu-excerpt">Dès le 1er avril, la Maison France Services de Saint-Aurel accueillera les habitants pour les démarches administratives, CAF, retraite, Pôle emploi et bien d'autres services.</div>
+          <span class="actu-cat">Services publics</span>
+        </div>
+      </div>
+      <div class="actu-item">
+        <div class="actu-img" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=300&q=80')"></div>
+        <div>
+          <div class="actu-date">3 mars 2025</div>
+          <div class="actu-title">Fête du printemps — Programme complet</div>
+          <div class="actu-excerpt">La traditionnelle fête de printemps aura lieu le 5 avril sur la place de la République. Au programme : marché artisanal, animations pour enfants, concert en soirée.</div>
+          <span class="actu-cat">Culture & Fêtes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">📅 Agenda municipal</div>
+      <div>
+        <div class="agenda-item">
+          <div class="agenda-date-box">
+            <div class="agenda-day">24</div>
+            <div class="agenda-month">Mars</div>
+          </div>
+          <div>
+            <div class="agenda-title">Conseil municipal</div>
+            <div class="agenda-lieu">🏛️ Salle des délibérations — 19h</div>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-date-box">
+            <div class="agenda-day">5</div>
+            <div class="agenda-month">Avr.</div>
+          </div>
+          <div>
+            <div class="agenda-title">Fête du printemps</div>
+            <div class="agenda-lieu">🎪 Place de la République — 10h</div>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-date-box">
+            <div class="agenda-day">12</div>
+            <div class="agenda-month">Avr.</div>
+          </div>
+          <div>
+            <div class="agenda-title">Collecte encombrants</div>
+            <div class="agenda-lieu">📦 Tout le territoire — 8h-12h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card blue">
+      <div class="sidebar-card-title">📞 Contact mairie</div>
+      <div class="contact-line"><span class="contact-icon-s">📍</span>Place de la République, 12400 Saint-Aurel</div>
+      <div class="contact-line"><span class="contact-icon-s">📞</span>05 65 12 34 56</div>
+      <div class="contact-line"><span class="contact-icon-s">✉</span>mairie@saint-aurel.fr</div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">🕐 Horaires d'ouverture</div>
+      <div class="mairie-hrs">
+        <div class="hr-line"><span class="hr-day">Lundi, Mercredi</span><span class="hr-time">8h30–17h</span></div>
+        <div class="hr-line"><span class="hr-day">Mardi, Jeudi</span><span class="hr-time">8h30–18h</span></div>
+        <div class="hr-line"><span class="hr-day">Vendredi</span><span class="hr-time">8h30–16h</span></div>
+        <div class="hr-line"><span class="hr-day">Samedi</span><span class="hr-time">9h–12h</span></div>
+        <div class="hr-line" style="color:#c0392b"><span class="hr-day">Dimanche</span><span class="hr-time" style="color:#c0392b">Fermé</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">🏛️ Mairie de Saint-Aurel</div>
+      <div class="footer-sub">Site officiel de la commune · Aveyron (12)</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">État civil</a></li>
+        <li><a href="#">Urbanisme</a></li>
+        <li><a href="#">Écoles</a></li>
+        <li><a href="#">Déchets</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Commune</h4>
+      <ul>
+        <li><a href="#">Histoire</a></li>
+        <li><a href="#">Conseil municipal</a></li>
+        <li><a href="#">Associations</a></li>
+        <li><a href="#">Agenda</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Infos légales</h4>
+      <ul>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Données personnelles</a></li>
+        <li><a href="#">Accessibilité</a></li>
+        <li><a href="#">Plan du site</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Mairie de Saint-Aurel — Tous droits réservés</p>
+    <a href="#" class="myrkr-badge">Site créé par <span>Myrkr</span></a>
+  </div>
+</footer>
+
+</body>
+</html>

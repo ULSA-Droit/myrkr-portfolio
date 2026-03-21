@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMIÈRE — Prêt-à-Porter Féminin Paris</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #fafafa;
+    --accent: #c8a96e;
+    --grey: #8a8a8a;
+    --light: #f2ede8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 4px; color: var(--black); text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--black); color: var(--white); padding: 10px 24px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s; }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-left {
+    background: var(--black);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 64px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: 'L';
+    position: absolute; top: -60px; left: -30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 400px; color: rgba(255,255,255,0.03);
+    line-height: 1;
+  }
+  .hero-tag { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7rem); color: var(--white); line-height: 0.9; letter-spacing: 2px; margin-bottom: 32px; }
+  .hero-title em { color: var(--accent); font-style: normal; }
+  .hero-desc { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 380px; margin-bottom: 48px; }
+  .hero-btns { display: flex; gap: 16px; }
+  .btn-primary { background: var(--accent); color: var(--black); padding: 16px 36px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 500; transition: opacity .2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: none; color: var(--white); padding: 16px 36px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: border-color .2s; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-right {
+    display: grid; grid-template-rows: 1fr 1fr;
+    gap: 0;
+  }
+  .hero-img-top {
+    background: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80') center/cover;
+  }
+  .hero-img-bot {
+    background: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80') center/cover;
+    position: relative;
+  }
+  .hero-img-bot::after {
+    content: 'Collection\AÉté 2025';
+    white-space: pre;
+    position: absolute; bottom: 32px; right: 32px;
+    font-family: 'Italiana', serif;
+    font-size: 1.4rem; color: var(--white);
+    text-align: right; line-height: 1.3;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  /* TICKER */
+  .ticker { background: var(--accent); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 20s linear infinite; }
+  .ticker-inner span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--black); font-weight: 500; padding: 0 48px; }
+
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* COLLECTION */
+  .collection { padding: 100px 48px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .section-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; }
+  .section-link { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .product-card { position: relative; overflow: hidden; cursor: pointer; }
+  .product-card:nth-child(1) { grid-row: span 2; }
+  .product-img {
+    width: 100%; padding-top: 130%;
+    background-size: cover; background-position: center;
+    transition: transform .6s ease;
+  }
+  .product-card:nth-child(1) .product-img { padding-top: 65%; }
+  .product-card:hover .product-img { transform: scale(1.05); }
+  .product-info { padding: 16px 0 8px; }
+  .product-brand { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); }
+  .product-name { font-size: 14px; font-weight: 500; margin: 4px 0; }
+  .product-price { font-size: 14px; color: var(--accent); font-weight: 500; }
+  .product-tag { position: absolute; top: 16px; left: 16px; background: var(--black); color: var(--white); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
+  .about-img { background: url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80') center/cover; }
+  .about-content { background: var(--light); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .about-year { font-family: 'Bebas Neue', sans-serif; font-size: 7rem; color: rgba(0,0,0,0.07); line-height: 1; margin-bottom: -20px; }
+  .about-text { font-size: 1rem; line-height: 1.9; color: #444; margin: 24px 0 40px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--accent); letter-spacing: 1px; }
+  .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); }
+
+  /* NEWSLETTER */
+  .newsletter { background: var(--black); padding: 80px 48px; text-align: center; }
+  .newsletter h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--white); letter-spacing: 2px; margin-bottom: 12px; }
+  .newsletter p { color: rgba(255,255,255,0.5); margin-bottom: 40px; font-size: 15px; }
+  .newsletter-form { display: flex; max-width: 480px; margin: 0 auto; gap: 0; }
+  .newsletter-form input { flex: 1; padding: 16px 20px; border: none; background: rgba(255,255,255,0.08); color: var(--white); font-size: 14px; outline: none; }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-form button { background: var(--accent); color: var(--black); padding: 16px 28px; border: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-weight: 500; white-space: nowrap; }
+
+  /* FOOTER */
+  footer { padding: 60px 48px 32px; border-top: 1px solid rgba(0,0,0,0.08); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 12px; }
+  .footer-desc { font-size: 13px; color: var(--grey); line-height: 1.7; max-width: 240px; }
+  .footer-col h4 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { font-size: 13px; color: var(--grey); text-decoration: none; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--black); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .footer-copy { font-size: 12px; color: var(--grey); }
+  .myrkr-badge { font-size: 11px; color: var(--grey); text-decoration: none; letter-spacing: 1px; transition: color .2s; }
+  .myrkr-badge:hover { color: var(--black); }
+  .myrkr-badge span { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; grid-template-rows: 1fr; }
+    .hero-img-bot { display: none; }
+    .hero-left { padding: 120px 32px 60px; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .product-card:nth-child(1) { grid-row: span 1; }
+    .about { grid-template-columns: 1fr; }
+    .about-img { min-height: 300px; }
+    .about-content { padding: 48px 32px; }
+    .collection { padding: 60px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">LUMIÈRE</a>
+  <ul class="nav-links">
+    <li><a href="#">Nouveautés</a></li>
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">Accessoires</a></li>
+    <li><a href="#">À propos</a></li>
+  </ul>
+  <button class="nav-cta">Boutique</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">✦ Nouvelle collection 2025</p>
+    <h1 class="hero-title">MODE<br><em>SANS</em><br>FILTRE</h1>
+    <p class="hero-desc">Des pièces pensées pour la femme moderne. Élégance assumée, matières nobles, coupes intemporelles.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Découvrir</button>
+      <button class="btn-secondary">Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-top"></div>
+    <div class="hero-img-bot"></div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Nouveautés chaque semaine</span>
+    <span>★</span>
+    <span>Livraison offerte dès 80€</span>
+    <span>★</span>
+    <span>Retours sous 30 jours</span>
+    <span>★</span>
+    <span>Paiement 3x sans frais</span>
+    <span>★</span>
+    <span>Nouveautés chaque semaine</span>
+    <span>★</span>
+    <span>Livraison offerte dès 80€</span>
+    <span>★</span>
+    <span>Retours sous 30 jours</span>
+    <span>★</span>
+    <span>Paiement 3x sans frais</span>
+    <span>★</span>
+  </div>
+</div>
+
+<section class="collection">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">La sélection du moment</p>
+      <h2 class="section-title">Pièces phares</h2>
+    </div>
+    <a href="#" class="section-link">Voir tout</a>
+  </div>
+  <div class="grid-4">
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80')"></div>
+      <span class="product-tag">New</span>
+      <div class="product-info">
+        <p class="product-brand">Isabel Marant</p>
+        <p class="product-name">Robe midi florale Elora</p>
+        <p class="product-price">189 €</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80')"></div>
+      <div class="product-info">
+        <p class="product-brand">Sandro</p>
+        <p class="product-name">Veste structurée Cléa</p>
+        <p class="product-price">245 €</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1581044777550-4cfa30de23e5?w=600&q=80')"></div>
+      <span class="product-tag">Exclusif</span>
+      <div class="product-info">
+        <p class="product-brand">Maje</p>
+        <p class="product-name">Ensemble lin Riviera</p>
+        <p class="product-price">195 €</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80')"></div>
+      <div class="product-info">
+        <p class="product-brand">Rouje</p>
+        <p class="product-name">Pull cachemire Sofia</p>
+        <p class="product-price">165 €</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=80')"></div>
+      <div class="product-info">
+        <p class="product-brand">A.P.C.</p>
+        <p class="product-name">Trench Juliette</p>
+        <p class="product-price">320 €</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-img"></div>
+  <div class="about-content">
+    <div class="about-year">2014</div>
+    <p class="section-tag">Notre histoire</p>
+    <h2 class="section-title">La mode comme<br>art de vivre</h2>
+    <p class="about-text">Fondée en 2014 à Paris, LUMIÈRE sélectionne des créateurs engagés pour une mode responsable, élégante et accessible. Chaque pièce est choisie pour sa qualité de fabrication et son caractère intemporel.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">2 400+</div>
+        <div class="stat-label">Clientes fidèles</div>
+      </div>
+      <div>
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Marques partenaires</div>
+      </div>
+      <div>
+        <div class="stat-num">11</div>
+        <div class="stat-label">Années d'existence</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Avis clients</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <h2>RESTEZ DANS LA TENDANCE</h2>
+  <p>Nouveautés, ventes privées et inspirations directement dans votre boîte mail.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="votre@email.fr">
+    <button>S'inscrire</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">LUMIÈRE</div>
+      <p class="footer-desc">Prêt-à-porter féminin sélectionné avec soin. Paris, France.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Collection</h4>
+      <ul>
+        <li><a href="#">Nouveautés</a></li>
+        <li><a href="#">Robes</a></li>
+        <li><a href="#">Vestes</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Livraison</a></li>
+        <li><a href="#">Retours</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">12 Rue du Faubourg, Paris</a></li>
+        <li><a href="#">contact@lumiere-mode.fr</a></li>
+        <li><a href="#">01 23 45 67 89</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 LUMIÈRE — Tous droits réservés</p>
+    <a href="#" class="myrkr-badge">Site créé par <span>Myrkr</span></a>
+  </div>
+</footer>
+
+</body>
+</html>

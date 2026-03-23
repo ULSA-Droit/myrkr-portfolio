@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr" data-devil="off">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trait Noir Studio — Tatouage sur mesure · Pau</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #faf8f4;
+    --paper: #f2ede4;
+    --linen: #e8e0d2;
+    --ink: #1a1612;
+    --brown: #3a2e22;
+    --rust: #8b4a2a;
+    --muted: #7a6e60;
+    --border: rgba(58,46,34,0.12);
+    --text: #1a1612;
+    --nav-bg: rgba(250,248,244,0.97);
+  }
+
+  /* ========= DEVIL MODE ========= */
+  [data-devil="on"] {
+    --white: #0a0608;
+    --paper: #0f090d;
+    --linen: #140b10;
+    --ink: #e8ddd4;
+    --brown: #c4a882;
+    --rust: #8b1a1a;
+    --muted: #6b5c5c;
+    --border: rgba(139,26,26,0.2);
+    --text: #e8ddd4;
+    --nav-bg: rgba(10,6,8,0.97);
+  }
+  [data-devil="on"] body { background: #0a0608; }
+  [data-devil="on"] .hero-left { background: #0a0608; }
+  [data-devil="on"] .hero-left::after { background: linear-gradient(to bottom, transparent, rgba(139,26,26,0.06)); }
+  [data-devil="on"] .bande-track { }
+  [data-devil="on"] .artiste { background: #0f090d; }
+  [data-devil="on"] .galerie { background: #0a0608; }
+  [data-devil="on"] .process { background: #0f090d; }
+  [data-devil="on"] .rdv { background: #0a0608; }
+  [data-devil="on"] .rdv-form { background: #0f090d; border-color: rgba(139,26,26,0.2); }
+  [data-devil="on"] footer { background: #050304; }
+  [data-devil="on"] .hero-right::after { background: linear-gradient(135deg, rgba(10,6,8,0.3), transparent); }
+  [data-devil="on"] .s-eyebrow { color: #8b1a1a; }
+  [data-devil="on"] .s-title em { color: #8b1a1a; }
+  [data-devil="on"] .hero-tag::before { background: #8b1a1a; }
+  [data-devil="on"] .hero-tag { color: #8b1a1a; }
+  [data-devil="on"] .hero-title em { color: #8b1a1a; }
+  [data-devil="on"] .artiste-val-icon { color: #8b1a1a; }
+  [data-devil="on"] .nav-rdv { background: #8b1a1a; border-color: #8b1a1a; }
+  [data-devil="on"] .nav-rdv:hover { background: #6b1010; }
+  [data-devil="on"] .btn-ink { background: #8b1a1a; }
+  [data-devil="on"] .btn-ink:hover { background: #6b1010; }
+  [data-devil="on"] .btn-light { border-color: rgba(139,26,26,0.3); }
+  [data-devil="on"] .btn-light:hover { border-color: #8b1a1a; color: #8b1a1a; }
+  [data-devil="on"] .process-title { color: #8b1a1a; }
+  [data-devil="on"] .galerie-style { color: rgba(232,221,212,0.8); }
+  [data-devil="on"] .rdv-form-title { color: #8b1a1a; }
+  [data-devil="on"] .btn-send { background: #8b1a1a; }
+  [data-devil="on"] .btn-send:hover { background: #6b1010; }
+  [data-devil="on"] .footer-logo em { color: rgba(139,26,26,0.8); }
+  [data-devil="on"] .footer-col h4 { color: rgba(139,26,26,0.7); }
+  [data-devil="on"] .footer-col a:hover { color: rgba(139,26,26,0.8); }
+  [data-devil="on"] .footer-myrkr span { color: rgba(139,26,26,0.6); }
+  [data-devil="on"] .hero-info-item { background: rgba(10,6,8,0.8); }
+  [data-devil="on"] .artiste-val-title { color: var(--text); }
+  [data-devil="on"] .nav-logo em { color: #8b1a1a; }
+  [data-devil="on"] .nav-links a:hover { color: #8b1a1a; }
+  /* grain overlay devil */
+  [data-devil="on"] body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.35;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--text); font-family: 'Karla', sans-serif; font-weight: 300; overflow-x: hidden; transition: background .4s, color .4s; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 60px; height: 70px; background: var(--nav-bg); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); transition: background .4s, border-color .4s; }
+  .nav-logo { font-family: 'Libre Baskerville', serif; font-size: 1rem; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; }
+  .nav-logo em { font-weight: 400; font-style: italic; color: var(--rust); }
+  .nav-links { display: flex; list-style: none; }
+  .nav-links a { display: block; padding: 0 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; line-height: 70px; transition: color .2s; }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-rdv { background: var(--ink); color: var(--white); padding: 9px 24px; border: none; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: 'Karla', sans-serif; transition: background .2s; }
+  .nav-rdv:hover { background: var(--brown); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 120px 72px 80px; position: relative; background: var(--white); }
+  .hero-left::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent); }
+  .hero-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--rust); margin-bottom: 36px; display: flex; align-items: center; gap: 14px; }
+  .hero-tag::before { content: ''; width: 36px; height: 1px; background: var(--rust); }
+  .hero-title { font-family: 'Libre Baskerville', serif; font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 700; color: var(--ink); line-height: 0.9; letter-spacing: -2px; margin-bottom: 16px; }
+  .hero-title em { font-weight: 400; font-style: italic; color: var(--rust); display: block; }
+  .hero-sub { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); margin-bottom: 36px; }
+  .hero-line { width: 40px; height: 1px; background: var(--border); margin-bottom: 28px; }
+  .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.9; max-width: 380px; margin-bottom: 48px; }
+  .hero-btns { display: flex; gap: 12px; }
+  .btn-ink { background: var(--ink); color: var(--white); padding: 15px 36px; border: none; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; font-family: 'Karla', sans-serif; transition: background .2s; }
+  .btn-ink:hover { background: var(--brown); }
+  .btn-light { background: none; color: var(--ink); padding: 15px 36px; border: 1px solid var(--border); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; font-family: 'Karla', sans-serif; transition: border-color .2s, color .2s; }
+  .btn-light:hover { border-color: var(--rust); color: var(--rust); }
+  .hero-right { background: url('https://images.unsplash.com/photo-1542727365-19732a80dcfd?w=900&q=85') center/cover; position: relative; }
+  .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(250,248,244,0.15) 0%, rgba(250,248,244,0) 60%); }
+  .hero-info { position: absolute; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid rgba(250,248,244,0.15); z-index: 1; }
+  .hero-info-item { padding: 20px 24px; border-right: 1px solid rgba(250,248,244,0.15); background: rgba(26,22,18,0.65); backdrop-filter: blur(4px); }
+  .hero-info-item:last-child { border-right: none; }
+  .hero-info-val { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1rem; color: rgba(250,248,244,0.8); margin-bottom: 3px; }
+  .hero-info-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(250,248,244,0.4); }
+
+  /* ARTISTE */
+  .artiste { padding: 120px 60px; background: var(--paper); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .s-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--rust); margin-bottom: 20px; }
+  .s-title { font-family: 'Libre Baskerville', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700; color: var(--ink); line-height: 1; letter-spacing: -1px; margin-bottom: 8px; }
+  .s-title em { font-weight: 400; font-style: italic; color: var(--rust); }
+  .s-desc { font-size: 14px; color: var(--muted); line-height: 1.9; margin-top: 20px; margin-bottom: 32px; }
+  .artiste-vals { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+  .artiste-val { display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .artiste-val-icon { width: 28px; color: var(--rust); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .artiste-val-title { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+  .artiste-val-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .artiste-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .artiste-img { background-size: cover; background-position: center; }
+  .artiste-img:nth-child(1) { grid-column: 1/3; height: 300px; background-image: url('https://images.unsplash.com/photo-1515606378517-3451a4fa2e12?w=700&q=80'); }
+  .artiste-img:nth-child(2) { height: 220px; background-image: url('https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=400&q=80'); }
+  .artiste-img:nth-child(3) { height: 220px; background-image: url('https://images.unsplash.com/photo-1555618254-6f5c5c9df6a9?w=400&q=80'); }
+
+  /* GALERIE */
+  .galerie { padding: 100px 60px; background: var(--white); }
+  .galerie-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .galerie-note { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 13px; color: var(--muted); max-width: 260px; text-align: right; line-height: 1.6; }
+  .galerie-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .galerie-item { aspect-ratio: 2/3; background-size: cover; background-position: center; position: relative; overflow: hidden; cursor: pointer; }
+  .galerie-overlay { position: absolute; inset: 0; background: rgba(26,22,18,0); transition: background .35s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .galerie-item:hover .galerie-overlay { background: rgba(26,22,18,0.6); }
+  .galerie-style { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(250,248,244,0.8); margin-bottom: 2px; transform: translateY(8px); opacity: 0; transition: all .3s; }
+  .galerie-item:hover .galerie-style { transform: translateY(0); opacity: 1; }
+
+  /* PROCESS */
+  .process { padding: 100px 60px; background: var(--linen); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 56px; border: 1px solid var(--border); }
+  .process-step { padding: 40px 32px; border-right: 1px solid var(--border); transition: background .2s; }
+  .process-step:last-child { border-right: none; }
+  .process-step:hover { background: rgba(255,255,255,0.5); }
+  .process-num { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 2.5rem; color: rgba(26,22,18,0.08); line-height: 1; margin-bottom: 16px; }
+  .process-title { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1.1rem; color: var(--rust); margin-bottom: 10px; }
+  .process-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  /* RDV */
+  .rdv { padding: 100px 60px; background: var(--white); border-top: 1px solid var(--border); }
+  .rdv-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .rdv-content .s-desc { max-width: 400px; }
+  .rdv-infos { margin-top: 36px; }
+  .rdv-row { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .rdv-label { color: var(--muted); }
+  .rdv-val { color: var(--ink); text-align: right; }
+  .rdv-form { background: var(--paper); border: 1px solid var(--border); padding: 48px; }
+  .rdv-form-title { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1.3rem; color: var(--rust); margin-bottom: 32px; }
+  .form-g { margin-bottom: 20px; }
+  .form-lbl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+  .form-inp { width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); color: var(--ink); padding: 10px 0; font-family: 'Karla', sans-serif; font-size: 14px; outline: none; transition: border-color .2s; }
+  .form-inp:focus { border-color: var(--rust); }
+  .form-inp::placeholder { color: rgba(26,22,18,0.25); }
+  .form-sel { width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); color: var(--ink); padding: 10px 0; font-family: 'Karla', sans-serif; font-size: 14px; outline: none; }
+  .form-sel option { background: var(--paper); }
+  .form-ta { width: 100%; background: none; border: none; border-bottom: 1px solid var(--border); color: var(--ink); padding: 10px 0; font-family: 'Karla', sans-serif; font-size: 14px; outline: none; resize: none; min-height: 80px; }
+  .btn-send { width: 100%; background: var(--ink); color: var(--white); border: none; padding: 16px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; font-family: 'Karla', sans-serif; margin-top: 8px; transition: background .2s; }
+  .btn-send:hover { background: var(--brown); }
+
+  footer { background: var(--ink); padding: 48px 60px 32px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; padding-bottom: 32px; border-bottom: 1px solid rgba(250,248,244,0.06); }
+  .footer-logo { font-family: 'Libre Baskerville', serif; font-size: 1rem; letter-spacing: 1px; color: rgba(250,248,244,0.8); }
+  .footer-logo em { color: rgba(139,74,42,0.8); font-style: italic; }
+  .footer-tagline { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 12px; color: rgba(250,248,244,0.25); margin-top: 6px; }
+  .footer-col h4 { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: rgba(139,74,42,0.7); margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 12px; color: rgba(250,248,244,0.25); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+  .footer-col a:hover { color: rgba(139,74,42,0.8); }
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 11px; color: rgba(250,248,244,0.18); }
+  .footer-myrkr { color: rgba(250,248,244,0.18); text-decoration: none; transition: color .2s; }
+  .footer-myrkr span { color: rgba(139,74,42,0.6); }
+  .footer-myrkr:hover { color: rgba(139,74,42,0.8); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; } .nav-links { display: none; }
+    .hero, .artiste, .rdv-inner { grid-template-columns: 1fr; }
+    .hero-left { padding: 100px 24px 60px; } .hero-right { height: 50vh; }
+    .hero-left::after { display: none; }
+    .artiste, .galerie, .process, .rdv { padding: 60px 24px; }
+    .galerie-grid { grid-template-columns: repeat(3, 1fr); }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { padding: 40px 24px 24px; } .footer-inner { flex-direction: column; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Trait <em>Noir</em> Studio</a>
+  <ul class="nav-links">
+    <li><a href="#artiste">Le studio</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#process">Comment ça marche</a></li>
+    <li><a href="#rdv">Prendre RDV</a></li>
+  </ul>
+  <button class="nav-rdv" onclick="document.getElementById('rdv').scrollIntoView({behavior:'smooth'})">Prendre RDV</button>
+  <button id="devilBtn" onclick="toggleDevil()" style="background:none;border:1px solid rgba(139,26,26,0.3);color:#8b1a1a;padding:8px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Karla',sans-serif;margin-left:8px;transition:background .3s;border-radius:2px;" title="Devil Mode">😈 Devil Mode</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Tatouage sur mesure · Pau, 64</div>
+    <h1 class="hero-title">Trait<br><em>Noir.</em></h1>
+    <p class="hero-sub">Studio de tatouage artisanal</p>
+    <div class="hero-line"></div>
+    <p class="hero-desc">Pas de catalogue. Chaque pièce commence par une feuille blanche et un crayon. Le tatouage comme un acte d'auteur — pensé avec vous, tracé à la main, ancré pour toujours.</p>
+    <div class="hero-btns">
+      <button class="btn-ink" onclick="document.getElementById('rdv').scrollIntoView({behavior:'smooth'})">Prendre rendez-vous</button>
+      <button class="btn-light" onclick="document.getElementById('galerie').scrollIntoView({behavior:'smooth'})">Voir la galerie</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-info">
+      <div class="hero-info-item"><div class="hero-info-val">Sur mesure</div><div class="hero-info-label">Chaque tatouage unique</div></div>
+      <div class="hero-info-item"><div class="hero-info-val">Dessin inclus</div><div class="hero-info-label">Projet co-construit</div></div>
+      <div class="hero-info-item"><div class="hero-info-val">7 ans</div><div class="hero-info-label">D'expérience</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="artiste" id="artiste">
+  <div class="artiste-imgs">
+    <div class="artiste-img"></div>
+    <div class="artiste-img"></div>
+    <div class="artiste-img"></div>
+  </div>
+  <div>
+    <p class="s-eyebrow">Le studio</p>
+    <h2 class="s-title">Un atelier,<br>pas un <em>salon.</em></h2>
+    <p class="s-desc">Trait Noir est un espace intimiste au cœur de Pau. Bois brut, lumière naturelle — un lieu pensé pour le travail dans le calme. Un seul client à la fois, toujours.</p>
+    <div class="artiste-vals">
+      <div class="artiste-val">
+        <span class="artiste-val-icon">✎</span>
+        <div><div class="artiste-val-title">Tout dessiné à la main</div><div class="artiste-val-desc">Aucun motif internet. Chaque projet commence par une feuille blanche et un crayon.</div></div>
+      </div>
+      <div class="artiste-val">
+        <span class="artiste-val-icon">◈</span>
+        <div><div class="artiste-val-title">Matériel certifié</div><div class="artiste-val-desc">Encres européennes REACH, aiguilles stériles usage unique, autoclave de stérilisation.</div></div>
+      </div>
+      <div class="artiste-val">
+        <span class="artiste-val-icon">◎</span>
+        <div><div class="artiste-val-title">Consultation gratuite</div><div class="artiste-val-desc">On se rencontre avant de commencer. Projet, placement, style. Aucune précipitation.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="galerie" id="galerie">
+  <div class="galerie-header">
+    <div>
+      <p class="s-eyebrow">Réalisations</p>
+      <h2 class="s-title">La <em>galerie</em></h2>
+    </div>
+    <p class="galerie-note">Chaque pièce est unique et ne sera jamais reproduite à l'identique.</p>
+  </div>
+  <div class="galerie-grid">
+    <div class="galerie-item" style="background-image:url('https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=400&q=80')"><div class="galerie-overlay"><div class="galerie-style">Fine line · Botanique</div></div></div>
+    <div class="galerie-item" style="background-image:url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80')"><div class="galerie-overlay"><div class="galerie-style">Black work · Géométrie</div></div></div>
+    <div class="galerie-item" style="background-image:url('https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=400&q=80')"><div class="galerie-overlay"><div class="galerie-style">Illustration · Paysage</div></div></div>
+    <div class="galerie-item" style="background-image:url('https://images.unsplash.com/photo-1542736667-069246bdbc6d?w=400&q=80')"><div class="galerie-overlay"><div class="galerie-style">Lettering · Typo</div></div></div>
+    <div class="galerie-item" style="background-image:url('https://images.unsplash.com/photo-1590246814883-9a50cf4e6177?w=400&q=80')"><div class="galerie-overlay"><div class="galerie-style">Dotwork · Mandala</div></div></div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <p class="s-eyebrow">Comment ça se passe</p>
+  <h2 class="s-title">Du projet<br>à la <em>peau.</em></h2>
+  <div class="process-grid">
+    <div class="process-step"><div class="process-num">01</div><div class="process-title">La demande</div><div class="process-desc">Envoyez votre idée. Une description, un emplacement, quelques références. Pas besoin de savoir dessiner.</div></div>
+    <div class="process-step"><div class="process-num">02</div><div class="process-title">La consultation</div><div class="process-desc">On se retrouve au studio pour parler du projet. Gratuit, sans engagement. C'est là que tout prend forme.</div></div>
+    <div class="process-step"><div class="process-num">03</div><div class="process-title">Le dessin</div><div class="process-desc">Je travaille le projet à la main. Vous le recevez avant la séance pour validation. Modifications incluses.</div></div>
+    <div class="process-step"><div class="process-num">04</div><div class="process-title">La séance</div><div class="process-desc">Dans le calme du studio. Un seul client à la fois. Suivi de cicatrisation complet inclus.</div></div>
+  </div>
+</section>
+
+<section class="rdv" id="rdv">
+  <div class="rdv-inner">
+    <div class="rdv-content">
+      <p class="s-eyebrow">Prendre rendez-vous</p>
+      <h2 class="s-title">On commence<br>par se <em>parler.</em></h2>
+      <p class="s-desc">Envoyez votre projet. Je réponds personnellement à chaque demande sous 48h. Si le projet me correspond, on organise une consultation.</p>
+      <div class="rdv-infos">
+        <div class="rdv-row"><span class="rdv-label">Studio</span><span class="rdv-val">Pau, Pyrénées-Atlantiques</span></div>
+        <div class="rdv-row"><span class="rdv-label">Délai moyen</span><span class="rdv-val">3 à 6 semaines</span></div>
+        <div class="rdv-row"><span class="rdv-label">Tarif</span><span class="rdv-val">À partir de 80€/h</span></div>
+        <div class="rdv-row"><span class="rdv-label">Contact</span><span class="rdv-val">contact@traitnoir.fr</span></div>
+      </div>
+    </div>
+    <div class="rdv-form">
+      <div class="rdv-form-title">Votre projet</div>
+      <div class="form-g"><label class="form-lbl">Prénom</label><input class="form-inp" type="text" placeholder="Prénom"></div>
+      <div class="form-g"><label class="form-lbl">Email</label><input class="form-inp" type="email" placeholder="votre@email.fr"></div>
+      <div class="form-g"><label class="form-lbl">Style</label>
+        <select class="form-sel"><option>Fine line / Minimaliste</option><option>Black work / Géométrique</option><option>Illustration / Réaliste</option><option>Lettering</option><option>Dotwork</option><option>Je ne sais pas encore</option></select>
+      </div>
+      <div class="form-g"><label class="form-lbl">Emplacement</label><input class="form-inp" type="text" placeholder="Avant-bras, épaule, cheville…"></div>
+      <div class="form-g"><label class="form-lbl">Décrivez votre projet</label><textarea class="form-ta" placeholder="Même imprécise, votre idée nous suffit."></textarea></div>
+      <button class="btn-send">Envoyer ma demande</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Trait <em>Noir</em> Studio</div>
+      <div class="footer-tagline">Tatouage sur mesure · Pau</div>
+    </div>
+    <div class="footer-col"><h4>Studio</h4><a href="#">Le studio</a><a href="#">Galerie</a><a href="#">Tarifs</a></div>
+    <div class="footer-col"><h4>Informations</h4><a href="#">Comment ça marche</a><a href="#">Soins & cicatrisation</a><a href="#">FAQ</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="#">Prendre RDV</a><a href="#">contact@traitnoir.fr</a><a href="#">Instagram</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Trait Noir Studio · Pau, Pyrénées-Atlantiques</span>
+    <a class="footer-myrkr" href="#">Site créé par <span>Myrkr</span></a>
+  </div>
+</footer>
+<script>
+function toggleDevil() {
+  const html = document.documentElement;
+  const isOn = html.getAttribute('data-devil') === 'on';
+  html.setAttribute('data-devil', isOn ? 'off' : 'on');
+  const btn = document.getElementById('devilBtn');
+  btn.textContent = isOn ? '😈 Devil Mode' : '☀️ Mode Normal';
+  btn.style.background = isOn ? 'none' : 'rgba(139,26,26,0.15)';
+}
+</script>
+</body>
+</html>

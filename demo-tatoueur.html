@@ -330,13 +330,212 @@
   </div>
 </footer>
 <script>
+/* ===== DEVIL POSSESSION MODE ===== */
+let devilActive = false;
+
 function toggleDevil() {
-  const html = document.documentElement;
-  const isOn = html.getAttribute('data-devil') === 'on';
-  html.setAttribute('data-devil', isOn ? 'off' : 'on');
+  if (devilActive) exorcism();
+  else possession();
+}
+
+function possession() {
   const btn = document.getElementById('devilBtn');
-  btn.textContent = isOn ? '😈 Devil Mode' : '☀️ Mode Normal';
-  btn.style.background = isOn ? 'none' : 'rgba(139,26,26,0.15)';
+  btn.disabled = true;
+
+  // Couche de possession par-dessus tout
+  const overlay = document.createElement('div');
+  overlay.id = 'devilOverlay';
+  overlay.style.cssText = `
+    position:fixed;inset:0;z-index:99999;pointer-events:none;
+    background:transparent;mix-blend-mode:overlay;
+  `;
+  document.body.appendChild(overlay);
+
+  // Canvas glitch
+  const canvas = document.createElement('canvas');
+  canvas.id = 'glitchCanvas';
+  canvas.style.cssText = `
+    position:fixed;inset:0;z-index:100000;pointer-events:none;
+    width:100%;height:100%;opacity:0;
+  `;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  // Message démoniaque
+  const msg = document.createElement('div');
+  msg.id = 'demonMsg';
+  msg.style.cssText = `
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    z-index:100001;pointer-events:none;text-align:center;
+    font-family:'Courier New',monospace;color:#ff0000;
+    text-shadow:0 0 10px #ff0000,0 0 30px #8b0000;
+    opacity:0;font-size:clamp(1rem,3vw,1.8rem);font-weight:700;
+    letter-spacing:4px;text-transform:uppercase;
+  `;
+  document.body.appendChild(msg);
+
+  // Séquence de possession
+  const sequence = [
+    { t:0,   fn: () => { startScreenShake(); startStaticNoise(ctx, canvas, 0.3); } },
+    { t:200, fn: () => { msg.style.opacity='1'; msg.innerHTML=''; typeGlitch(msg, '&gt;&gt; INTRUSION DÉTECTÉE &lt;&lt;'); } },
+    { t:600, fn: () => { document.body.style.filter='invert(1) hue-rotate(180deg)'; } },
+    { t:800, fn: () => { document.body.style.filter=''; } },
+    { t:900, fn: () => { document.body.style.filter='invert(1) hue-rotate(90deg) saturate(3)'; } },
+    { t:1000,fn: () => { document.body.style.filter=''; } },
+    { t:1100,fn: () => { msg.innerHTML=''; typeGlitch(msg, 'Ȁ̷̢̨̬͔͓̝̻̿̓N̷̯͈̥̉I̸̩͓̭̗̓̒M̸̨̱̼̍̎͜A̶̢̧̛͇̬̩͆̽̈́ ̴̣̆I̶̞̊N̷̥̓V̸̠̘̀̊Ę̴̡̢͈͊̉͘R̸͓̲̃̈́T̶͚͂̽͝Ȉ̸̠T̵̗͆͝'); } },
+    { t:1400,fn: () => { document.body.style.transform='skewX(3deg)'; } },
+    { t:1500,fn: () => { document.body.style.transform='skewX(-2deg)'; } },
+    { t:1600,fn: () => { document.body.style.transform='skewY(1deg)'; } },
+    { t:1700,fn: () => { document.body.style.transform=''; } },
+    { t:1800,fn: () => { msg.innerHTML=''; typeGlitch(msg, '🜏 POSSESSION EN COURS... 🜏'); intensifyStatic(ctx, canvas); } },
+    { t:2200,fn: () => { bigFlash('red'); } },
+    { t:2300,fn: () => { bigFlash('#400000'); } },
+    { t:2400,fn: () => { bigFlash('red'); } },
+    { t:2500,fn: () => {
+      // Activation du dark mode
+      document.documentElement.setAttribute('data-devil','on');
+      devilActive = true;
+      stopScreenShake();
+      stopStatic(canvas);
+      canvas.style.opacity = '0';
+    }},
+    { t:2600,fn: () => { msg.innerHTML='<span style="font-size:2em">😈</span><br>DEVIL MODE ACTIVÉ'; msg.style.color='#8b1a1a'; msg.style.textShadow='0 0 20px #8b1a1a'; } },
+    { t:3200,fn: () => {
+      msg.style.transition='opacity .5s';
+      msg.style.opacity='0';
+      overlay.remove();
+      btn.textContent='☀️ Exorcisme';
+      btn.style.background='rgba(139,26,26,0.2)';
+      btn.disabled = false;
+      setTimeout(()=>{ msg.remove(); canvas.remove(); }, 600);
+    }},
+  ];
+
+  sequence.forEach(s => setTimeout(s.fn, s.t));
+}
+
+function exorcism() {
+  const btn = document.getElementById('devilBtn');
+  btn.disabled = true;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'exCanvas';
+  canvas.style.cssText = `position:fixed;inset:0;z-index:100000;pointer-events:none;width:100%;height:100%;`;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const msg = document.createElement('div');
+  msg.style.cssText = `
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    z-index:100001;pointer-events:none;text-align:center;
+    font-family:'Courier New',monospace;color:#fff;
+    text-shadow:0 0 20px #fff,0 0 60px #fffde7;
+    font-size:clamp(1rem,3vw,1.6rem);font-weight:700;
+    letter-spacing:3px;text-transform:uppercase;
+  `;
+  document.body.appendChild(msg);
+
+  const seq = [
+    { t:0,   fn: () => { startStaticNoise(ctx,canvas,0.5); startScreenShake(); } },
+    { t:300, fn: () => { msg.style.opacity='1'; typeGlitch(msg,'✝ EXORCISME INITIÉ ✝'); } },
+    { t:700, fn: () => { bigFlash('white'); } },
+    { t:900, fn: () => { bigFlash('#fff9c4'); } },
+    { t:1100,fn: () => { bigFlash('white'); } },
+    { t:1300,fn: () => { msg.innerHTML='✝ ✝ ✝ LA LUMIÈRE REVIENT ✝ ✝ ✝'; intensifyStatic(ctx,canvas); } },
+    { t:1800,fn: () => {
+      document.documentElement.setAttribute('data-devil','off');
+      devilActive = false;
+      stopScreenShake();
+      stopStatic(canvas);
+    }},
+    { t:2000,fn: () => { msg.innerHTML='☀️ Mode normal restauré'; msg.style.color='#ffd700'; } },
+    { t:2600,fn: () => {
+      msg.style.transition='opacity .5s'; msg.style.opacity='0';
+      btn.textContent='😈 Devil Mode';
+      btn.style.background='none';
+      btn.disabled=false;
+      setTimeout(()=>{ msg.remove(); canvas.remove(); }, 600);
+    }},
+  ];
+  seq.forEach(s => setTimeout(s.fn, s.t));
+}
+
+/* ===== HELPERS ===== */
+let shakeInterval = null;
+function startScreenShake() {
+  let t = 0;
+  shakeInterval = setInterval(() => {
+    t++;
+    const x = (Math.random()-0.5)*8;
+    const y = (Math.random()-0.5)*6;
+    document.body.style.transform = `translate(${x}px,${y}px)`;
+  }, 40);
+}
+function stopScreenShake() {
+  clearInterval(shakeInterval);
+  document.body.style.transform = '';
+}
+
+let staticFrame = null;
+function startStaticNoise(ctx, canvas, intensity) {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.opacity = String(intensity);
+  function draw() {
+    const id = ctx.createImageData(canvas.width, canvas.height);
+    const d = id.data;
+    for (let i=0; i<d.length; i+=4) {
+      const v = Math.random() > 0.85 ? 255 : 0;
+      const r = Math.random() > 0.95 ? 180 : 0;
+      d[i]   = v + r;
+      d[i+1] = Math.random() > 0.97 ? 80 : 0;
+      d[i+2] = Math.random() > 0.97 ? 80 : 0;
+      d[i+3] = 120;
+    }
+    // scanlines
+    for (let y=0; y<canvas.height; y+=4) {
+      for (let x=0; x<canvas.width; x++) {
+        const idx = (y*canvas.width+x)*4;
+        d[idx+3] = Math.min(255, d[idx+3] + 60);
+      }
+    }
+    ctx.putImageData(id, 0, 0);
+    // Glitch horizontal slice
+    if (Math.random() > 0.6) {
+      const sliceY = Math.random() * canvas.height;
+      const sliceH = Math.random() * 20 + 2;
+      const offset = (Math.random()-0.5) * 40;
+      ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceH, offset, sliceY, canvas.width, sliceH);
+    }
+    staticFrame = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function intensifyStatic(ctx, canvas) {
+  canvas.style.opacity = '0.8';
+}
+function stopStatic(canvas) {
+  cancelAnimationFrame(staticFrame);
+  canvas.style.opacity = '0';
+}
+
+function bigFlash(color) {
+  const f = document.createElement('div');
+  f.style.cssText = `position:fixed;inset:0;z-index:99998;background:${color};pointer-events:none;opacity:0.7;transition:opacity .15s;`;
+  document.body.appendChild(f);
+  setTimeout(() => { f.style.opacity='0'; setTimeout(()=>f.remove(),200); }, 80);
+}
+
+function typeGlitch(el, text) {
+  el.innerHTML = '';
+  let i = 0;
+  const glitchChars = '!@#$%^&*<>{}|~█▓░▒';
+  const iv = setInterval(() => {
+    if (i >= text.length) { el.innerHTML = text; clearInterval(iv); return; }
+    const glitch = glitchChars[Math.floor(Math.random()*glitchChars.length)];
+    el.innerHTML = text.slice(0,i) + `<span style="color:#ff4444">${glitch}</span>`;
+    i++;
+  }, 35);
 }
 </script>
 </body>

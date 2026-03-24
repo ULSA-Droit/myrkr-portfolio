@@ -398,7 +398,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
     <div>
       <div class="admin-screen-card">
         <div class="admin-screen-topbar">
-          <span class="admin-screen-title">✦ Gestion Acceuil/Affichage</span>
+          <span class="admin-screen-title">✦ Gestion Vitrine</span>
           <div class="admin-screen-dots">
             <div class="admin-screen-dot" style="background:#ef4444"></div>
             <div class="admin-screen-dot" style="background:#f59e0b"></div>
@@ -407,9 +407,9 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
         </div>
         <div class="admin-screen-body">
           <div class="admin-label" style="margin-bottom:10px">Bandeau de collection</div>
-          <div class="admin-bandeau">Profitez du beau temps (Editable)!</div>
+          <div class="admin-bandeau">Collection Printemps 2025</div>
           <div class="admin-setting-row">
-            <div class="admin-setting-input">Journée spéciale (Editable)</div>
+            <div class="admin-setting-input">Nouveautés Été 2025</div>
             <button class="admin-setting-btn">OK</button>
           </div>
           <div class="admin-label" style="margin-top:14px">Téléphone</div>
@@ -428,7 +428,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
           </div>
         </div>
       </div>
-      <div class="admin-screen-label">Paramètres d'affichage/messages d'acceuil</div>
+      <div class="admin-screen-label">Paramètres boutique</div>
     </div>
 
     <!-- Screen 3: Vue liste articles -->
@@ -554,11 +554,11 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
       </div>
     </div>
     <div class="contact-form">
-      <div class="form-group"><label>Votre nom</label><input type="text" placeholder="Marie Dupont"></div>
-      <div class="form-group"><label>Email</label><input type="email" placeholder="marie@exemple.fr"></div>
-      <div class="form-group"><label>Ville</label><input type="text" placeholder="Pau, Bayonne, Tarbes…"></div>
+      <div class="form-group"><label>Votre nom</label><input type="text" name="nom" placeholder="Marie Dupont" required></div>
+      <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="marie@exemple.fr" required></div>
+      <div class="form-group"><label>Ville</label><input type="text" name="ville" placeholder="Pau, Bayonne, Tarbes…"></div>
       <div class="form-group"><label>Type de projet</label>
-        <select>
+        <select name="type_projet">
           <option>Commerce / Boutique</option>
           <option>Café / Restaurant</option>
           <option>Institution / Mairie</option>
@@ -567,8 +567,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
           <option>Autre</option>
         </select>
       </div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Décrivez votre projet en quelques mots…"></textarea></div>
-      <button class="btn-submit">Envoyer mon message →</button>
+      <div class="form-group"><label>Message</label><textarea name="message" placeholder="Décrivez votre projet en quelques mots…"></textarea></div>
+      <button class="btn-submit" id="submitBtn" onclick="sendForm(event)">Envoyer mon message →</button>
     </div>
   </div>
 </section>
@@ -585,6 +585,49 @@ footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex;
 </footer>
 
 <script>
+async function sendForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const nom = document.querySelector('[name="nom"]').value.trim();
+  const email = document.querySelector('[name="email"]').value.trim();
+  const message = document.querySelector('[name="message"]').value.trim();
+
+  if (!nom || !email || !message) {
+    btn.textContent = '⚠️ Remplissez les champs obligatoires';
+    btn.style.background = '#f59e0b';
+    setTimeout(() => { btn.textContent = 'Envoyer mon message →'; btn.style.background = ''; }, 2500);
+    return;
+  }
+
+  btn.textContent = '⏳ Envoi en cours…';
+  btn.disabled = true;
+
+  try {
+    const data = new FormData();
+    document.querySelectorAll('.contact-form [name]').forEach(el => data.append(el.name, el.value));
+
+    const res = await fetch('https://formspree.io/f/mdawqpnq', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      btn.textContent = '✅ Message envoyé !';
+      btn.style.background = '#10b981';
+      document.querySelectorAll('.contact-form input, .contact-form textarea').forEach(el => el.value = '');
+      setTimeout(() => { btn.textContent = 'Envoyer mon message →'; btn.style.background = ''; btn.disabled = false; }, 4000);
+    } else {
+      throw new Error();
+    }
+  } catch {
+    btn.textContent = '❌ Erreur — réessayez';
+    btn.style.background = '#ef4444';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Envoyer mon message →'; btn.style.background = ''; }, 3000);
+  }
+}
+
 function toggleDark() {
   const html = document.documentElement;
   const isDark = html.getAttribute('data-theme') === 'dark';
